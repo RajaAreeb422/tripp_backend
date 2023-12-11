@@ -41,7 +41,7 @@ const {
           results.password = undefined;
           const token_payload = {
             id: results.id,
-            name: results.name,
+            name: results.first_name + results.last_name,
             email: body.email,
             role_id:results.role_id
             //type: "JobSeeker",
@@ -88,12 +88,7 @@ const {
 
     signUp: (req, res) => {
       const body = req.body;
-      let cred={
-        email:req.body.email,
-        name:req.body.fullname,
-        password:req.body.password
-      }
-     
+      
       getUserByEmail(body.email, (err, result) => {
         if (err) {
           console.log(err);
@@ -118,7 +113,7 @@ const {
               console.log(err);
               return res.status(500).json({
                 success: 0,
-                message: "Database connection errror adding JobSeeker",
+                message: "Database connection errror adding User",
                 error:err
               });
             }
